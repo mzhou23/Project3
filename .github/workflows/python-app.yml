@@ -27,7 +27,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Set Environmental Path
       run: |
-        export PYTHONPATH="\src"
+        export PYTHONPATH="$PWD\src"
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
