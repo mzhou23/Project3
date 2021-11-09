@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, url_for, redirect
 app = Flask(__name__)
 
 items = []
-
+tags = []
 
 class Priority:
     def __init__(self, priority):
@@ -31,13 +31,16 @@ class Priority:
         self.color = self.get_priority_color(self.priority)
 
 
+
+
 @app.route("/")
 def index():
     user = {'username': 'Will'}
     welcome = render_template("welcome.html", title='index', user=user)
     item_list = render_template("item_list.html", items=items)
     item_adder = render_template("adder.html")
-    return welcome + item_adder + item_list
+    tag_adder = render_template("tag.html",tags = tags)
+    return welcome + item_adder + item_list + tag_adder
 
 
 @app.route("/remove/<int:id>")
@@ -81,7 +84,18 @@ def check(id):
             items[i]['checked'] = not items[i]['checked']
     return redirect(url_for("index"))
 
+@app.route("/tag", methods=["POST"])
+def addTag():
+    tag_name = request.form.get("tag_name")
+    if tag_name is not '':
+        tags.append(tag_name)
+    print(tags)
+    return redirect(url_for("index"))
 
+@app.route("/removeTag/<string:tag>", methods=["POST"])
+def removeTag(tag):
+    tags.remove(tag)
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(debug=True)
