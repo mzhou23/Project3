@@ -74,5 +74,14 @@ def clear():
     return redirect(url_for("index"))
 
 
+@app.route("/check/<int:id>", methods=["POST"])
+def check(id):
+    for i in range(len(items)):
+        if items[i]['id'] is id:
+            items[i]['checked'] = not items[i]['checked']
+    return redirect(url_for("index"))
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -11,13 +11,20 @@
 		{% for item in items %}
 		<tr style="color:white" bgcolor={{item.priority.color}}>
 			<td>{{ item.name }}</td>
-			<td>{{ item.checked }}</td>
+			<td>
+				
+				<form action="/check/{{item.id}}" method="post">
+					<div>
+						<button type="submit">{{item.checked}}</button>
+					</div>
+				</form>
+			</td>
 			<td>
 				<form action="/prioritize/{{item.id}}" method="post">
 					<div>
 						<select name="priority_selection" onchange="this.form.submit()">
 							{% for priority in item.priority.priority_list%}
-							<option value={{ priority }}>{{ priority }}</option>
+							<option>{{ priority }}</option>
 							{% endfor %}
 						</select>
 					</div>
