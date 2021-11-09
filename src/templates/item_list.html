@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+	<table border=1 align="left">
+		<tr>
+			<th style="min-width:100px" align="left">Item</th>
+			<th style="min-width:1px" align="left">Completed?</th>
+			<th style="min-width:1px" align="left">Priority</th>
+			<th style="min-width:1px" align="left">Tags</th>
+			<th style="min-width:1px" align="left">Remove</th>
+		</tr>
+		{% for item in items %}
+		<tr style="color:white" bgcolor={{item.priority.color}}>
+			<td>{{ item.name }}</td>
+			<td>{{ item.checked }}</td>
+			<td>
+				<form action="/prioritize/{{item.id}}" method="post">
+					<div>
+						<select name="priority_selection" onchange="this.form.submit()">
+							{% for priority in item.priority.priority_list%}
+							<option value={{ priority }}>{{ priority }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</form>
+			</td>
+			<td>{{ item.tags }}</td>
+			<td><a href="/remove/{{item.id}}">Remove</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+</html>
