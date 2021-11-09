@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-	<table border=1 align="left">
+	<table border=1>
 		<tr>
 			<th style="min-width:100px" align="left">Item</th>
 			<th style="min-width:1px" align="left">Completed?</th>
@@ -30,8 +30,19 @@
 					</div>
 				</form>
 			</td>
-			<td>{{ item.tags }}</td>
+			<td>
+				<form action="/tagItem/{{item.id}}" method="post">
+					<div>
+						<select name="tag_selection" onchange="this.form.submit()">
+							{% for tag in item.tag.tag_list%}
+							<option>{{ tag }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</form>
+			</td>
 			<td><a href="/remove/{{item.id}}">Remove</a></td>
+			<td>{{item.id}}</td>
 		</tr>
 		{% endfor %}
 	</table>
