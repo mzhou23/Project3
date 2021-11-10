@@ -116,7 +116,7 @@ def prioritize(id):
     return redirect(url_for("index"))
 
 
-@app.route("/check/<int:id>", methods=["POST"])
+@app.route("/check/<int:id>")
 def check(id):
     for i in range(len(items)):
         if items[i]["id"] == id:
