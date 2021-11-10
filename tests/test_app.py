@@ -40,7 +40,7 @@ def test_remove():
     assert failsOutOfContext
     
     client = app.test_client()
-    url = "/add"
+    url = "/remove"
     data = 0
     response = client.post(url, data=data)
     
