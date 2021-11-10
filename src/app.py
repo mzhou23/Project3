@@ -80,9 +80,13 @@ def remove(id):
 @app.route("/add", methods=["POST"])
 def add():
     item_name = request.form.get("item_name")
+    if len(items) > 0:
+        new_id = items[-1]['id'] + 1
+    else:
+        new_id = 0
     if item_name != '':
         new_item = {'name': item_name, 'checked': False, 'priority': Priority('medium'), 'tag': Tag(),
-                    'id': len(items)}
+                    'id': new_id}
         items.append(new_item)
     return redirect(url_for("index"))
 
