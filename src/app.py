@@ -34,7 +34,7 @@ class Priority:
 
 
 class Tag:
-    def __init__(self,original_tags):
+    def __init__(self, original_tags):
 
         self.tag = "none"
         self.tag_list = [self.tag]
@@ -47,7 +47,7 @@ class Tag:
         self.tag = tag
         self.update_tag_list(original_tags)
 
-    def update_tag_list(self,original_tags):
+    def update_tag_list(self, original_tags):
         self.tag_list = original_tags.copy()
         if self.tag in self.tag_list and self.tag != "none":
             self.tag_list.remove(self.tag)
@@ -61,8 +61,13 @@ class Tag:
 @app.route("/")
 def index():
     date = datetime.now()
-    user = {'username': 'Will & Elliot'}
-    welcome = render_template("welcome.html", title='index', user=user, time = date.strftime("%d/%m/%y\n%H:%M:%S"))
+    user = {"username": "Will & Elliot"}
+    welcome = render_template(
+        "welcome.html",
+        title="index",
+        user=user,
+        time=date.strftime("%d/%m/%y\n%H:%M:%S"),
+    )
     item_list = render_template("item_list.html", items=items)
     item_adder = render_template("adder.html")
     tag_adder = render_template("tag.html", tags=tags)
@@ -87,8 +92,14 @@ def add():
         new_id = 0
     if item_name != "":
         date = datetime.now()
-        new_item = {'name': item_name, 'checked': False, 'priority': Priority('medium'), 'tag': Tag(tags),
-                    'id': new_id, 'time':date.strftime("%d/%m/%H:%M")}
+        new_item = {
+            "name": item_name,
+            "checked": False,
+            "priority": Priority("medium"),
+            "tag": Tag(tags),
+            "id": new_id,
+            "time": date.strftime("%d/%m/%H:%M"),
+        }
         items.append(new_item)
     return redirect(url_for("index"))
 
@@ -142,8 +153,8 @@ def removeTag(tag):
 def tagItem(id):
     tag = request.form.get("tag_selection")
     for i in range(len(items)):
-        if items[i]['id'] == id:
-            items[i]['tag'].set_tag(tag,tags)
+        if items[i]["id"] == id:
+            items[i]["tag"].set_tag(tag, tags)
     return redirect(url_for("index"))
 
 
