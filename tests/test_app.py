@@ -52,6 +52,11 @@ def test_prioritize():
         failsOutOfContext = True
     assert failsOutOfContext
     
+    client = app.test_client()
+    response = client.get("/prioritize/0")
+    assert response.status_code == 302 # redirect
+    
+    
 def test_check():
     failsOutOfContext = False
     try:
@@ -59,6 +64,11 @@ def test_check():
     except:
         failsOutOfContext = True
     assert failsOutOfContext
+    
+    client = app.test_client()
+    response = client.get("/check/0")
+    assert response.status_code == 302 # redirect
+    
     
 def test_addTag():
     failsOutOfContext = False
@@ -68,6 +78,14 @@ def test_addTag():
         failsOutOfContext = True
     assert failsOutOfContext
     
+    client = app.test_client()
+    url = "/addTag"
+    data = "tag name  "
+    response = client.post(url, data=data)
+    
+    assert response.status_code == 302 # code for redirect
+    
+    
 def test_removeTag():
     failsOutOfContext = False
     try:
@@ -76,6 +94,11 @@ def test_removeTag():
         failsOutOfContext = True
     assert failsOutOfContext
     
+    client = app.test_client()
+    response = client.get("/removeTag/tag1")
+    assert response.status_code == 302 # code for redirect
+    
+    
 def test_tagItem():
     failsOutOfContext = False
     try:
@@ -83,3 +106,7 @@ def test_tagItem():
     except:
         failsOutOfContext = True
     assert failsOutOfContext
+    
+    client = app.test_client()
+    response = client.get("/tagItem/0")
+    assert response.status_code == 302 # code for redirect
