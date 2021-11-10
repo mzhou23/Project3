@@ -39,6 +39,13 @@ def test_remove():
         failsOutOfContext = True
     assert failsOutOfContext
     
+    client = app.test_client()
+    url = "/add"
+    data = 0
+    response = client.post(url, data=data)
+    
+    assert response.status_code == 302 # code for redirect
+    
 def test_prioritize():
     failsOutOfContext = False
     try:
