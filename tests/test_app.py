@@ -13,7 +13,7 @@ def test_tag():
 
 def test_index():
     assert index() is not None
-    assert type(index()) == 'str'
+    assert type(index()) == str
     
 def test_remove():
-    assert remove() is "/"
+    assert remove() == "/"
