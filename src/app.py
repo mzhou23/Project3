@@ -127,17 +127,18 @@ def check(id):
 @app.route("/addTag", methods=["POST"])
 def addTag():
     tag_name = request.form.get("tag_name")
-
+    print(f"tag name: {tag_name}")
     # remove trailing spaces
     while tag_name[-1] == " ":
         tag_name = tag_name[:-1]
-
+        print(f"removed space: {tag_name}")
     if (
         tag_name != ""
         and tag_name[-1] != " "
         and tag_name != "none"
         and tag_name not in tags
     ):
+        print("add tag inside if")
         tags.append(tag_name)
         for item in items:
             item["tag"].update_tag_list(tags)
