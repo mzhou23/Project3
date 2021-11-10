@@ -87,8 +87,9 @@ def add():
     else:
         new_id = 0
     if item_name != '':
+        date = datetime.now()
         new_item = {'name': item_name, 'checked': False, 'priority': Priority('medium'), 'tag': Tag(),
-                    'id': new_id}
+                    'id': new_id, 'time':date.strftime("%d/%m/%H:%M")}
         items.append(new_item)
     return redirect(url_for("index"))
 

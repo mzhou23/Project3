@@ -7,6 +7,7 @@
 			<th style="min-width:1px" align="left">Priority</th>
 			<th style="min-width:1px" align="left">Tags</th>
 			<th style="min-width:1px" align="left">Remove</th>
+			<th style="min-width:1px" align="left">Time</th>
 		</tr>
 		{% for item in items %}
 		<tr style="color:white" bgcolor={{item.priority.color}}>
@@ -42,6 +43,7 @@
 				</form>
 			</td>
 			<td><a href="/remove/{{item.id}}">Remove</a></td>
+			<td>{{ item.time }}</td>
 		</tr>
 		{% endfor %}
 	</table>
