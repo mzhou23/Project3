@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Flask, render_template, request, url_for, redirect
 
 app = Flask(__name__)
@@ -60,8 +61,9 @@ class Tag:
 
 @app.route("/")
 def index():
+    date = datetime.now()
     user = {'username': 'Will'}
-    welcome = render_template("welcome.html", title='index', user=user)
+    welcome = render_template("welcome.html", title='index', user=user, time = date.strftime("%d/%m/%y\n%H:%M:%S"))
     item_list = render_template("item_list.html", items=items)
     item_adder = render_template("adder.html")
     tag_adder = render_template("tag.html", tags=tags)
