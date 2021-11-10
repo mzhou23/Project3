@@ -44,8 +44,20 @@ def test_remove():
     data = 0
     response = client.post(url, data=data)
     
-    assert response.status_code == 302 # code for redirect
+    assert response.status_code == 404 # not found; item doesn't exist
     
+    client = app.test_client()
+    url = "/add"
+    data = "add item"
+    response = client.post(url, data=data)
+    
+    url = "/remove"
+    data = 0
+    response = client.post(url, data=data)
+    
+    assert response.status_code == 302 # redirect, item now exists
+    
+
 def test_prioritize():
     failsOutOfContext = False
     try:
