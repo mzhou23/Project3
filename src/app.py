@@ -116,7 +116,8 @@ def addTag():
     while tag_name[-1] == ' ':
         tag_name = tag_name[:-1]
 
-    if tag_name != '' and tag_name[-1] != ' ' and tag_name != 'none' and tag_name not in tags:
+    if tag_name != '' and tag_name[-1] != ' ' \
+    and tag_name != 'none' and tag_name not in tags:
         tags.append(tag_name)
         for item in items:
             item["tag"].update_tag_list()
