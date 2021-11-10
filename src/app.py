@@ -48,7 +48,7 @@ class Tag:
 
     def update_tag_list(self):
         self.tag_list = tags.copy()
-        if self.tag in self.tag_list and self.tag is not "none":
+        if self.tag in self.tag_list and self.tag != "none":
             self.tag_list.remove(self.tag)
             self.tag_list.insert(0, self.tag)
             self.tag_list.append("none")
@@ -71,7 +71,7 @@ def index():
 @app.route("/remove/<int:id>")
 def remove(id):
     for i in range(len(items)):
-        if items[i]['id'] is id:
+        if items[i]['id'] == id:
             del items[i]
             break
     return redirect(url_for("index"))
@@ -91,7 +91,7 @@ def add():
 def prioritize(id):
     priority = request.form.get("priority_selection")
     for i in range(len(items)):
-        if items[i]['id'] is id:
+        if items[i]['id'] == id:
             items[i]['priority'] = Priority(priority)
     return redirect(url_for("index"))
 
@@ -99,7 +99,7 @@ def prioritize(id):
 @app.route("/check/<int:id>", methods=["POST"])
 def check(id):
     for i in range(len(items)):
-        if items[i]['id'] is id:
+        if items[i]['id'] == id:
             items[i]['checked'] = not items[i]['checked']
     return redirect(url_for("index"))
 
@@ -109,7 +109,7 @@ def addTag():
     tag_name = request.form.get("tag_name")
 
     # remove trailing spaces
-    while tag_name[-1] is ' ':
+    while tag_name[-1] == ' ':
         tag_name = tag_name[:-1]
 
     if tag_name != '' and tag_name[-1] != ' ' and tag_name != 'none' and tag_name not in tags:
@@ -131,7 +131,7 @@ def removeTag(tag):
 def tagItem(id):
     tag = request.form.get("tag_selection")
     for i in range(len(items)):
-        if items[i]['id'] is id:
+        if items[i]['id'] == id:
             items[i]['tag'].set_tag(tag)
     return redirect(url_for("index"))
 
