@@ -80,7 +80,7 @@ def remove(id):
 @app.route("/add", methods=["POST"])
 def add():
     item_name = request.form.get("item_name")
-    if item_name is not '':
+    if item_name != '':
         new_item = {'name': item_name, 'checked': False, 'priority': Priority('medium'), 'tag': Tag(),
                     'id': len(items)}
         items.append(new_item)
@@ -112,7 +112,7 @@ def addTag():
     while tag_name[-1] is ' ':
         tag_name = tag_name[:-1]
 
-    if tag_name is not '' and tag_name[-1] is not ' ' and tag_name is not 'none' and tag_name not in tags:
+    if tag_name != '' and tag_name[-1] != ' ' and tag_name != 'none' and tag_name not in tags:
         tags.append(tag_name)
         for item in items:
             item["tag"].update_tag_list()
