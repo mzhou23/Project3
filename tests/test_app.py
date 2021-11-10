@@ -1,10 +1,10 @@
 from flask import Flask
 
-import app
+import app as a
 
 def test_tag():
     tags = []
-    tag1 = app.Tag(tags)
+    tag1 = a.Tag(tags)
     assert len(tag1.tag_list) == 1
     tags.append("cat")
     tag1.set_tag("cat",tags)
@@ -12,7 +12,7 @@ def test_tag():
     assert tag1.tag_list[0] == "cat"
 
 def test_index():
-    assert app.index() is not None
+    assert a.index() is not None
     # assert type(index()) == str
     
 def test_remove():
@@ -20,4 +20,4 @@ def test_remove():
 
     items = []
     tags = []
-    assert app.remove(0) == "/"
+    assert a.remove(0) == "/"
