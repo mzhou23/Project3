@@ -10,14 +10,11 @@ def test_tag():
     tag1.set_tag("cat",tags)
     assert tag1.get_tag() == "cat"
     assert tag1.tag_list[0] == "cat"
-
-def test_index():
-    assert a.index() is not None
-    # assert type(index()) == str
     
 def test_remove():
-    app = Flask(__name__)
-
-    items = []
-    tags = []
-    assert a.remove(0) == "/"
+    failsOutOfContext = False
+    try:
+        a.remove(0)
+    except:
+        failsOutOfContext = True
+    assert failsOutOfContext
