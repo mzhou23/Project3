@@ -26,7 +26,7 @@ def test_add():
     
     client = app.test_client()
     url = "/add"
-    data = "new item"
+    data = {"item_name", "new item"}
     response = client.post(url, data=data)
     
     assert response.status_code == 302 # code for redirect
@@ -53,7 +53,7 @@ def test_prioritize():
     assert failsOutOfContext
     
     client = app.test_client()
-    data = "medium"
+    data = {"priority_selection": "medium"}
     response = client.post("/prioritize/0", data=data)
     assert response.status_code == 302 # redirect
     
@@ -68,7 +68,7 @@ def test_check():
     
     client = app.test_client()
     url = "/add"
-    data = "new item"
+    data = {"item_name": "new item"}
     response = client.post(url, data=data)
     
     response = client.get("/check/0")
@@ -85,7 +85,7 @@ def test_addTag():
     
     client = app.test_client()
     url = "/addTag"
-    data = "tag name  "
+    data = {"tag_name": "tag name  "}
     response = client.post(url, data=data)
     
     assert response.status_code == 302 # code for redirect
@@ -113,6 +113,6 @@ def test_tagItem():
     assert failsOutOfContext
     
     client = app.test_client()
-    data = "none"
+    data = {"tag_selection": "none"}
     response = client.post("/tagItem/0", data=data)
     assert response.status_code == 302 # code for redirect
