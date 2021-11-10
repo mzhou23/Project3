@@ -1,12 +1,12 @@
 from flask import Flask
 
-import app as a
+from app import *
     
 
 def test_index():
     failsOutOfContext = False
     try:
-        a.index()
+        index()
     except:
         failsOutOfContext = True
     assert failsOutOfContext
@@ -19,7 +19,7 @@ def test_index():
 def test_remove():
     failsOutOfContext = False
     try:
-        a.remove(0)
+        remove(0)
     except:
         failsOutOfContext = True
     assert failsOutOfContext
@@ -27,7 +27,7 @@ def test_remove():
 def test_add():
     failsOutOfContext = False
     try:
-        a.add()
+        add()
     except:
         failsOutOfContext = True
     assert failsOutOfContext
@@ -35,7 +35,7 @@ def test_add():
 def test_prioritize():
     failsOutOfContext = False
     try:
-        a.prioritize(0)
+        prioritize(0)
     except:
         failsOutOfContext = True
     assert failsOutOfContext
@@ -43,7 +43,7 @@ def test_prioritize():
 def test_check():
     failsOutOfContext = False
     try:
-        a.check(0)
+        check(0)
     except:
         failsOutOfContext = True
     assert failsOutOfContext
@@ -51,7 +51,7 @@ def test_check():
 def test_addTag():
     failsOutOfContext = False
     try:
-        a.addTag()
+        addTag()
     except:
         failsOutOfContext = True
     assert failsOutOfContext
@@ -59,7 +59,7 @@ def test_addTag():
 def test_removeTag():
     failsOutOfContext = False
     try:
-        a.removeTag("some_tag")
+        removeTag("some_tag")
     except:
         failsOutOfContext = True
     assert failsOutOfContext
@@ -67,7 +67,7 @@ def test_removeTag():
 def test_tagItem():
     failsOutOfContext = False
     try:
-        a.tagItem(0)
+        tagItem(0)
     except:
         failsOutOfContext = True
     assert failsOutOfContext
