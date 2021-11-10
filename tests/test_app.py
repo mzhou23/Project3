@@ -4,7 +4,7 @@ import app
 
 def test_tag():
     tags = []
-    tag1 = Tag(tags)
+    tag1 = app.Tag(tags)
     assert len(tag1.tag_list) == 1
     tags.append("cat")
     tag1.set_tag("cat",tags)
@@ -12,8 +12,8 @@ def test_tag():
     assert tag1.tag_list[0] == "cat"
 
 def test_index():
-    assert index() is not None
+    assert app.index() is not None
     # assert type(index()) == str
     
 def test_remove():
-    assert remove(0) == "/"
+    assert app.remove(0) == "/"
