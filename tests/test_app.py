@@ -35,7 +35,7 @@ def test_add():
     data = "new item"
     response = client.post(url, data=data)
     
-    assert response.status_code = 302 # code for redirect
+    assert response.status_code == 302 # code for redirect
     
     # home now includes "new item"
     response = client.get("/")
