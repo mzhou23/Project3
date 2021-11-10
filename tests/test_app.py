@@ -1,4 +1,5 @@
 from app import index
+from app import remove
 from app import Tag
 
 def test_tag():
@@ -11,4 +12,8 @@ def test_tag():
     assert tag1.tag_list[0] == "cat"
 
 def test_index():
-    assert True
+    assert index() is not None
+    assert type(index()) == 'str'
+    
+def test_remove():
+    assert remove() is "/"
