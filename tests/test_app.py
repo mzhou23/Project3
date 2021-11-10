@@ -16,4 +16,8 @@ def test_index():
     # assert type(index()) == str
     
 def test_remove():
+    app = Flask(__name__)
+
+    items = []
+    tags = []
     assert app.remove(0) == "/"
