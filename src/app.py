@@ -11,14 +11,19 @@ class Priority:
     def __init__(self, priority):
         self.priority_colors = {"low": "green", "medium": "orange", "high": "red"}
 
-        self.priority = priority
+        if priority not in self.priority_colors:
+            self.priority = "medium"
+        else:
+            self.priority = priority
+
         self.priority_list = self.create_priority_list(self.priority)
         self.color = self.get_priority_color(self.priority)
 
     def create_priority_list(self, priority):
         priority_list = ["low", "medium", "high"]
-        priority_list.remove(priority)
-        priority_list.insert(0, priority)
+        if priority in priority_list:
+            priority_list.remove(priority)
+            priority_list.insert(0, priority)
         return priority_list
 
     def get_priority_color(self, priority):

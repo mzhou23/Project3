@@ -12,10 +12,10 @@ def test_init():
     assert l.priority_list == ["low", "medium", "high"]
     assert l.color == "green"
 
-    h = Priority("medium")
-    assert h.priority == "medium"
+    h = Priority("high")
+    assert h.priority == "high"
     assert h.priority_list == ["high", "low", "medium"]
-    assert h.color == "orange"
+    assert h.color == "red"
 
 
 def test_cpl():
@@ -30,18 +30,17 @@ def test_cpl():
     assert prior_list == ["low", "medium", "high"]
 
     prior_list = p.create_priority_list("other")
-    assert prior_list == ["other", "low", "medium", "high"]
+    assert prior_list == ["low", "medium", "high"]
 
 
 def test_gpc():
-    p = Priority("low")
-    assert p.get_priority_color() == "green"
-
-    p = Priority("medium")
-    assert p.get_priority_color() == "orange"
-
     p = Priority("high")
-    assert p.get_priority_color() == "red"
+
+    assert p.get_priority_color("low") == "green"
+
+    assert p.get_priority_color("medium") == "orange"
+
+    assert p.get_priority_color("high") == "red"
 
 
 def test_gp():
@@ -49,16 +48,16 @@ def test_gp():
     assert p.get_priority() == "low"
 
     p = Priority("other")
-    assert p.get_priority() == "other"
+    assert p.get_priority() == "medium"
 
 
 def test_sp():
     p = Priority("low")
     assert p.get_priority() == "low"
-    assert p.get_priority_color == "green"
+    assert p.color == "green"
     assert p.priority_list == ["low", "medium", "high"]
     
     p.set_priority("medium")
-    assert p.get_priority == "medium"
-    assert p.get_priority_color == "orange"
+    assert p.get_priority() == "medium"
+    assert p.color == "orange"
     assert p.priority_list == ["medium", "low", "high"]
