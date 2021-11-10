@@ -9,14 +9,14 @@ tags = []
 
 class Priority:
     def __init__(self, priority):
-        self.priority_colors = {'low': 'green', 'medium': 'orange', 'high': 'red'}
+        self.priority_colors = {"low": "green", "medium": "orange", "high": "red"}
 
         self.priority = priority
         self.priority_list = self.create_priority_list(self.priority)
         self.color = self.get_priority_color(self.priority)
 
     def create_priority_list(self, priority):
-        priority_list = ['low', 'medium', 'high']
+        priority_list = ["low", "medium", "high"]
         priority_list.remove(priority)
         priority_list.insert(0, priority)
         return priority_list
@@ -58,7 +58,6 @@ class Tag:
             self.tag_list.insert(0, "none")
 
 
-
 @app.route("/")
 def index():
     date = datetime.now()
@@ -73,7 +72,7 @@ def index():
 @app.route("/remove/<int:id>")
 def remove(id):
     for i in range(len(items)):
-        if items[i]['id'] == id:
+        if items[i]["id"] == id:
             del items[i]
             break
     return redirect(url_for("index"))
@@ -83,10 +82,10 @@ def remove(id):
 def add():
     item_name = request.form.get("item_name")
     if len(items) > 0:
-        new_id = items[-1]['id'] + 1
+        new_id = items[-1]["id"] + 1
     else:
         new_id = 0
-    if item_name != '':
+    if item_name != "":
         date = datetime.now()
         new_item = {'name': item_name, 'checked': False, 'priority': Priority('medium'), 'tag': Tag(tags),
                     'id': new_id, 'time':date.strftime("%d/%m/%H:%M")}
@@ -98,16 +97,16 @@ def add():
 def prioritize(id):
     priority = request.form.get("priority_selection")
     for i in range(len(items)):
-        if items[i]['id'] == id:
-            items[i]['priority'] = Priority(priority)
+        if items[i]["id"] == id:
+            items[i]["priority"] = Priority(priority)
     return redirect(url_for("index"))
 
 
 @app.route("/check/<int:id>", methods=["POST"])
 def check(id):
     for i in range(len(items)):
-        if items[i]['id'] == id:
-            items[i]['checked'] = not items[i]['checked']
+        if items[i]["id"] == id:
+            items[i]["checked"] = not items[i]["checked"]
     return redirect(url_for("index"))
 
 
@@ -116,11 +115,15 @@ def addTag():
     tag_name = request.form.get("tag_name")
 
     # remove trailing spaces
-    while tag_name[-1] == ' ':
+    while tag_name[-1] == " ":
         tag_name = tag_name[:-1]
 
-    if tag_name != '' and tag_name[-1] != ' ' \
-    and tag_name != 'none' and tag_name not in tags:
+    if (
+        tag_name != ""
+        and tag_name[-1] != " "
+        and tag_name != "none"
+        and tag_name not in tags
+    ):
         tags.append(tag_name)
         for item in items:
             item["tag"].update_tag_list(tags)
