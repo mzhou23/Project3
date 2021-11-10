@@ -2,7 +2,7 @@ from app import index
 from app import Tag
 
 def test_tag():
-    tags = ["none"]
+    tags = []
     tag1 = Tag(tags)
     assert len(tag1.tag_list) == 1
     tags.append("cat")
