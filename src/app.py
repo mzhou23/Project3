@@ -66,11 +66,9 @@ class Tag:
 @app.route("/")
 def index():
     date = datetime.now()
-    user = {"username": "Will & Elliot"}
     welcome = render_template(
         "welcome.html",
-        title="index",
-        user=user,
+        title="Doddle - To-Do App",
         time=date.strftime("%d/%m/%y\n%H:%M:%S"),
     )
     item_list = render_template("item_list.html", items=items)
