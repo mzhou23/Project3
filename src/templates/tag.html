@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<form action="/addTag" method="post">
+	<div>
+		<label for="title">Add Tag</label>
+			<input type="text" name="tag_name" placeholder="Enter a tag">
+		<button type="submit">Add</button>
+	</div>
+</form>
+
+	<body>
+		<b>Remove Tags:</b>
+	</body>
+
+<table>
+	<tr>
+	{% for tag in tags %}
+			<form action="/removeTag/{{tag}}" method="post">
+				<button type="submit">{{tag}}</button>
+			</form>
+	{% endfor %}
+	</tr>
+</table>
+</html>
