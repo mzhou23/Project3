@@ -25,22 +25,11 @@ def test_add():
     assert failsOutOfContext
     
     client = app.test_client()
-    
-    # home initially does not include "new item"
-    response = client.get("/")
-    home_txt = response.get_data()
-    assert b"new item" not in response.data
-    
     url = "/add"
     data = "new item"
     response = client.post(url, data=data)
     
     assert response.status_code == 302 # code for redirect
-    
-    # home now includes "new item"
-    response = client.get("/")
-    home_txt = response.get_data()
-    assert b"new item" in response.data
     
 def test_remove():
     failsOutOfContext = False
