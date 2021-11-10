@@ -2,11 +2,7 @@ from flask import Flask
 
 import app as a
     
-# while we cannot directly test the flask html methods
-# we can ensure that they are appropriately intertwined
-# with the flask context by verifying they fail outside
-# of it.
-    
+
 def test_index():
     failsOutOfContext = False
     try:
@@ -14,6 +10,11 @@ def test_index():
     except:
         failsOutOfContext = True
     assert failsOutOfContext
+    
+    
+    client = app.test_client()
+    response = client.get("/")
+    assert response.status_code = 200
     
 def test_remove():
     failsOutOfContext = False
