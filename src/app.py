@@ -39,21 +39,21 @@ class Priority:
 
 
 class Tag:
-    def __init__(self):
+    def __init__(self, original_tags):
 
         self.tag = "none"
         self.tag_list = [self.tag]
-        self.update_tag_list()
+        self.update_tag_list(original_tags)
 
     def get_tag(self):
         return self.tag
 
-    def set_tag(self, tag):
+    def set_tag(self, tag, original_tags):
         self.tag = tag
-        self.update_tag_list()
+        self.update_tag_list(original_tags)
 
-    def update_tag_list(self):
-        self.tag_list = tags.copy()
+    def update_tag_list(self, original_tags):
+        self.tag_list = original_tags.copy()
         if self.tag in self.tag_list and self.tag != "none":
             self.tag_list.remove(self.tag)
             self.tag_list.insert(0, self.tag)
@@ -66,7 +66,7 @@ class Tag:
 @app.route("/")
 def index():
     date = datetime.now()
-    user = {"username": "Will"}
+    user = {"username": "Will & Elliot"}
     welcome = render_template(
         "welcome.html",
         title="index",
@@ -101,7 +101,7 @@ def add():
             "name": item_name,
             "checked": False,
             "priority": Priority("medium"),
-            "tag": Tag(),
+            "tag": Tag(tags),
             "id": new_id,
             "time": date.strftime("%d/%m/%H:%M"),
         }
@@ -142,7 +142,7 @@ def addTag():
     ):
         tags.append(tag_name)
         for item in items:
-            item["tag"].update_tag_list()
+            item["tag"].update_tag_list(tags)
     return redirect(url_for("index"))
 
 
@@ -150,7 +150,7 @@ def addTag():
 def removeTag(tag):
     tags.remove(tag)
     for item in items:
-        item["tag"].update_tag_list()
+        item["tag"].update_tag_list(tags)
     return redirect(url_for("index"))
 
 
@@ -159,7 +159,7 @@ def tagItem(id):
     tag = request.form.get("tag_selection")
     for i in range(len(items)):
         if items[i]["id"] == id:
-            items[i]["tag"].set_tag(tag)
+            items[i]["tag"].set_tag(tag, tags)
     return redirect(url_for("index"))
 
 
