@@ -1,6 +1,6 @@
-from app import index
-from app import remove
-from app import Tag
+from flask import Flask
+
+import app
 
 def test_tag():
     tags = []
